@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generate Insights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Generate Insights</h2>
+
+        <div class="nav-links">
+            <a href="/dashboard">Back to Dashboard</a> |
+            <a href="/logout">Logout</a>
+        </div>
+
+        <p style="opacity: 0.8; margin-bottom: 20px;">Upload a numeric CSV file to automatically calculate statistics.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div style="border: 2px dashed var(--border-color); padding: 30px; border-radius: 8px; margin-bottom: 20px; background: rgba(0,0,0,0.1);">
+                <input type="file" name="file" required style="border: none; background: transparent;">
+            </div>
+            <button type="submit">Generate Insights</button>
+        </form>
+
+        {% if insights %}
+        <div class="output">
+            <h3 style="color: var(--accent);">Key Insights</h3>
+            <ul>
+                {% for i in insights %}
+                <li>{{ i }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

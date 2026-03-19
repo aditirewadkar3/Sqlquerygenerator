@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container" style="max-width: 800px;">
+        <h2>Welcome, {{ user }}</h2>
+
+        <div class="nav-links">
+            <a href="/logout">Logout</a>
+        </div>
+
+        <p style="opacity: 0.8; margin-bottom: 30px;">What would you like to do with your data today?</p>
+
+        <div class="cards-container">
+            <a href="/insights" class="card">
+                <h3>Generate Insights</h3>
+                <p>Upload a CSV file and let us automatically summarize the key statistics and patterns in your numeric data.</p>
+            </a>
+            
+            <a href="/sql-generator" class="card">
+                <h3>Generate SQL Query</h3>
+                <p>Upload a CSV file and ask a question in natural language to instantly receive a corresponding SQL query.</p>
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

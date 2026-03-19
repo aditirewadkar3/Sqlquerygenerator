@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SQL Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>SQL Query Generator</h2>
+
+        <div class="nav-links">
+            <a href="/dashboard">Back to Dashboard</a> |
+            <a href="/logout">Logout</a>
+        </div>
+
+        <p style="opacity: 0.8; margin-bottom: 20px;">Upload a CSV and define your desired output to generate a query.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% if filename %}
+            <div style="border: 2px solid var(--primary-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: rgba(68,147,248,0.1); text-align: left;">
+                <p style="margin: 0; color: var(--text-color); font-weight: 600;">Active Data Context: <span style="color: var(--accent);">{{ filename }}</span></p>
+                <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">You can continue asking questions about this file without re-uploading.</p>
+            </div>
+            {% endif %}
+            
+            <div style="border: 2px dashed var(--border-color); padding: 20px; border-radius: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.1);">
+                <input type="file" name="file" {% if not filename %}required{% endif %} style="border: none; background: transparent; margin: 0;">
+                <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6; text-align: left;">{% if filename %}Optional: Upload a new file to replace the current one.{% endif %}</p>
+            </div>
+            <input type="text" name="input" placeholder="e.g. Total sales grouped by month..." required>
+            <button type="submit">Generate SQL</button>
+        </form>
+
+        {% if query %}
+        <div class="output">
+            <h3 style="color: var(--accent);">Generated SQL</h3>
+            <pre>{{ query }}</pre>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
